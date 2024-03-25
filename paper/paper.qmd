@@ -128,11 +128,11 @@ leaflet() |>
 ```{r}
 library(shiny)
 library(ggplot2)
-library(readxl)
+library(readr)
 
 # Replace 'path/to/your/data.xlsx' with the actual path to your Excel file
 # Adjust 'sheet' and column names as necessary
-data <- read_excel("STA302/Essay12 Shiny/statistic_id1288821_number-of-deportees-and-deaths-at-auschwitz-1941-1945-by-background.xlsx", sheet = "Data")
+data <- readr::read_csv("data/raw_data/Raw_data.csv")
 
 ui <- fluidPage(
   titlePanel("Auschwitz Victims by Nationality"),
@@ -174,14 +174,15 @@ And also planes (@fig-planes). (You can change the height and width, but don't w
 #| warning: false
 #| message: false
 
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
+# Specify the new directory path
+new_directory <- "~/Users/seanuuuu/Desktop/STA302/Essay12 Shiny"
 
-##analysis_data |> 
-  ##ggplot(aes(x = width, y = length)) +
-  ##geom_point(alpha = 0.8) +
-  ##theme_minimal() +
-  ##labs(x = "Wing width (mm)",
-       ##y = "Wing length (mm)")
+# Change the current working directory
+setwd(new_directory)
+
+# Check if the directory changed
+current_directory <- getwd()
+print(current_directory)
 ```
 
 Talk way more about it. 
