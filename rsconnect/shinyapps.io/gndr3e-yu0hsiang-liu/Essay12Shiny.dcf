@@ -1,0 +1,13 @@
+name: Essay12Shiny
+title: Essay12Shiny
+username: gndr3e-yu0hsiang-liu
+account: gndr3e-yu0hsiang-liu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11597732
+bundleId: 8425825
+url: https://gndr3e-yu0hsiang-liu.shinyapps.io/Essay12Shiny/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: other/llm/usage.txt|paper/paper.qmd|paper/references.bib|README.md
