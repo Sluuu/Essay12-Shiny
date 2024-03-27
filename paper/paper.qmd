@@ -11,6 +11,8 @@ number-sections: true
 toc: true
 bibliography: references.bib
 ---
+
+\newpage
 # Introduction
 This Shiny app provides an interactive platform for analyzing and visualizing data related to the victims killed at Auschwitz concentration camp. It enables users to explore the dataset based on specific characteristics of the victims, such as their birthplace, residence, or religion. By offering a user-friendly interface, the app allows for dynamic selection and filtering, presenting the data through intuitive visualizations and detailed tables.
 
@@ -23,6 +25,8 @@ Additionally, the app includes a data table feature that shows detailed records 
 # History of the Auschwitz concentration camp
 In January 1945, Soviet troops liberated Auschwitz, ending the largest mass murder in a single location in human history. The camp, located in Poland, was evacuated by the Nazis just days before. The Holocaust Memorial Museum estimates that at least 960,000 Jews and thousands of others, including Poles, Roma, Soviet prisoners of war, and individuals from other nationalities, were systematically killed at Auschwitz. Grisly evidence of the horror was found by the Soviets, including thousands of starving prisoners, piles of clothing, human hair, and other belongings. Auschwitz consisted of three main camps, with Auschwitz II (Birkenau) being the largest and the site of the gas chambers. Medical experiments, including those by Dr Josef Mengele, were conducted at Auschwitz I. The camp was also a center for forced labor, with Auschwitz III (Monowitz) primarily serving as a labor camp for the German company IG Farben. As the Soviet army approached, the Nazis began evacuating the camp, resulting in the deaths of thousands of prisoners during forced marches. While many Nazi personnel served at Auschwitz, only a fraction have been prosecuted for their crimes, with ongoing efforts to bring remaining perpetrators to justice. [@HistoryofAuschwitz]
 
+\newpage
+
 # interactive graph and APP 
 
 ## Data 
@@ -31,6 +35,7 @@ The data was downloaded from the United States Holocaust Memorial Museum, the Ho
 ## APP webpage 
 From the user Interface, the drop-down menu shows the options for the data category Birthplace, Residence, and Religion. For the victims' birthplace and residence, the options are categorized by the first letter of its birthplace or residence instead of the whole name. As there weren't that many religions, for the victims' regions, the options are categorized by the full name of the regions. Depending on the user's selection, the app filters the data and generates a bar plot and a data table showcasing the count of victims based on the selected criteria.
 Under the data table, there are a total of 7 categories
+
 - Last Name: It shows the last name of the victim
 - First Name(s): It shows the first name of the victim
 - Date of Birth: It shows the date of birth of the victim, formatted as: YYYY-MM-DD
@@ -41,6 +46,8 @@ Under the data table, there are a total of 7 categories
 
 ## Packages usage
 The interactive graph and APP were constructed in R [@citeR] with the help of the following packages, `ggplot2` package of @ggplot2, `DT` package of @DT, `shiny` package of @shiny, `dplyr` package of @dplyr, `ggraph` package of @ggraph, and article `Welcome to the {tidyverse}` @rohan. 
+
+\newpage
 
 # Conclusion
 
