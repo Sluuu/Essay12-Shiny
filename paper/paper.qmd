@@ -42,7 +42,7 @@ Under the data table, there are a total of 7 categories
 - Date of Death: It shows the date of death of the victim, formatted as: YYYY-MM-DD
 - Birthplace: It shows the first letter of the birthplace of the victim
 - Residence: It shows the first letter of the residence of the victim
-- Religion: It shows the full name of the region of the victim
+- Religion: It shows the full name of the religion of the victim
 
 ## Packages usage
 The interactive graph and APP were constructed in R [@citeR] with the help of the following packages, `ggplot2` package of @ggplot2, `DT` package of @DT, `shiny` package of @shiny, `dplyr` package of @dplyr, `ggraph` package of @ggraph, and article `Welcome to the {tidyverse}` @rohan. 
