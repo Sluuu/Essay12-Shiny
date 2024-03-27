@@ -1,330 +1,55 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "App showing victims killed at Auschwitz concentration camp"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Sean Liu
+thanks: "Code and data are available at: https://github.com/Sluuu/Essay12-Shiny, The interactive graph and an interactive table are available at:  https://gndr3e-yu0hsiang-liu.shinyapps.io/Essay12Shiny/"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "The interactive graph and the shiny app aims to analyze and visualize data on victims at Auschwitz concentration camp. Offering insights based on their birthplace, residence, or religion. The application allows users to interactively select specific criteria and view the corresponding data visualization and table."
 format: pdf
 number-sections: true
+toc: true
 bibliography: references.bib
 ---
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-library(tidyverse)
-library(palmerpenguins)
-library(babynames)
-library(knitr)
-library(rmarkdown)
-library(leaflet)
-library(babynames)
-library(mapdeck)
-library(shiny)
-library(tidyverse)
-library(troopdata)
-library(usethis)
-```
-
-
 # Introduction
+This Shiny app provides an interactive platform for analyzing and visualizing data related to the victims killed at Auschwitz concentration camp. It enables users to explore the dataset based on specific characteristics of the victims, such as their birthplace, residence, or religion. By offering a user-friendly interface, the app allows for dynamic selection and filtering, presenting the data through intuitive visualizations and detailed tables.
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+Upon selecting a category like birthplace, residence, or religion, users can further refine their analysis by choosing specific attributes within that category, such as the first letter of the birthplace or residence, or a particular religion. The app then generates a corresponding bar plot that displays the count of victims associated with the selected criteria, providing immediate visual insights into the dataset.
 
-The remainder of this paper is structured as follows. @sec-data....
+Additionally, the app includes a data table feature that shows detailed records filtered according to the user's selections. This table allows users to delve deeper into the data, offering a granular view of the individual entries that make up the visualized statistics.
 
 
 
-# Data {#sec-data}
+# History of the Auschwitz concentration camp
+In January 1945, Soviet troops liberated Auschwitz, ending the largest mass murder in a single location in human history. The camp, located in Poland, was evacuated by the Nazis just days before. The Holocaust Memorial Museum estimates that at least 960,000 Jews and thousands of others, including Poles, Roma, Soviet prisoners of war, and individuals from other nationalities, were systematically killed at Auschwitz. Grisly evidence of the horror was found by the Soviets, including thousands of starving prisoners, piles of clothing, human hair, and other belongings. Auschwitz consisted of three main camps, with Auschwitz II (Birkenau) being the largest and the site of the gas chambers. Medical experiments, including those by Dr Josef Mengele, were conducted at Auschwitz I. The camp was also a center for forced labor, with Auschwitz III (Monowitz) primarily serving as a labor camp for the German company IG Farben. As the Soviet army approached, the Nazis began evacuating the camp, resulting in the deaths of thousands of prisoners during forced marches. While many Nazi personnel served at Auschwitz, only a fraction have been prosecuted for their crimes, with ongoing efforts to bring remaining perpetrators to justice. [@HistoryofAuschwitz]
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+# interactive graph and APP 
 
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-#| error: false
-#| message: false
-top_five_names_by_year <-
-  babynames |>
-  arrange(desc(n)) |>
-  slice_head(n = 5, by = c(year, sex))
+## Data 
+The data was downloaded from the United States Holocaust Memorial Museum, the Holocaust Survivors and Victims Database included the victims' AUSCHWITZ DEATH CERTIFICATES from 1941-1943. The death certificates includes the victims' first and last name, date of birth, date of death, birthplaces, residences, and religions. Total of 65280 victims were recorded. 
 
-top_five_names_by_year |>
-  ggplot(aes(x = n, fill = sex)) +
-  geom_histogram(position = "dodge") +
-  theme_minimal() +
-  scale_fill_brewer(palette = "Set1") +
-  labs(
-    x = "Babies with that name",
-    y = "Occurrences",
-    fill = "Sex"
-  )
+## APP webpage 
+From the user Interface, the drop-down menu shows the options for the data category Birthplace, Residence, and Religion. For the victims' birthplace and residence, the options are categorized by the first letter of its birthplace or residence instead of the whole name. As there weren't that many religions, for the victims' regions, the options are categorized by the full name of the regions. Depending on the user's selection, the app filters the data and generates a bar plot and a data table showcasing the count of victims based on the selected criteria.
+Under the data table, there are a total of 7 categories
+- Last Name: It shows the last name of the victim
+- First Name(s): It shows the first name of the victim
+- Date of Birth: It shows the date of birth of the victim, formatted as: YYYY-MM-DD
+- Date of Death: It shows the date of death of the victim, formatted as: YYYY-MM-DD
+- Birthplace: It shows the first letter of the birthplace of the victim
+- Residence: It shows the first letter of the residence of the victim
+- Religion: It shows the full name of the region of the victim
 
-```
+## Packages usage
+The interactive graph and APP were constructed in R [@citeR] with the help of the following packages, `ggplot2` package of @ggplot2, `DT` package of @DT, `shiny` package of @shiny, `dplyr` package of @dplyr, `ggraph` package of @ggraph, and article `Welcome to the {tidyverse}` @rohan. 
 
-```{r}
-bases <- get_basedata()
+# Conclusion
 
-# Some of the bases include unexpected characters which we need to address
-Encoding(bases$basename) <- "latin1"
+In conclusion, this Shiny app represents a tool for engaging with the historical data surrounding the victims of the Auschwitz concentration camp. By leveraging an interactive platform, it not only aids in the visualization and analysis of the tragic events but also serves as an educational resource, emphasizing the scale and individuality of the loss experienced during the Holocaust.
 
-leaflet(data = bases) |>
-  addTiles() |> # Add default OpenStreetMap map tiles
-  addMarkers(
-    lng = bases$lon,
-    lat = bases$lat,
-    popup = bases$basename,
-    label = bases$countryname
-  )
-```
+The app allows users to navigate through a dataset derived from the Auschwitz death certificates, focusing on specific victim characteristics like birthplace, residence, and religion. The incorporation of a user-friendly interface enables both scholars and the general public to gain insights into the demographics of the victims, facilitating a deeper understanding of the diverse backgrounds of those who perished.
 
-```{r}
-build <-
-  get_builddata(startyear = 2008, endyear = 2019) |>
-  filter(!is.na(lon)) |>
-  mutate(
-    cost = case_when(
-      spend_construction > 100000 ~ "More than $100,000,000",
-      spend_construction > 10000 ~ "More than $10,000,000",
-      spend_construction > 1000 ~ "More than $1,000,000",
-      TRUE ~ "$1,000,000 or less"
-    )
-  )
+As we reflect on the history of Auschwitz, the liberation of the camp, and the ongoing efforts to prosecute those responsible, this app serves as a reminder of the critical need to remember and learn from the past. It underscores the importance of preserving the memory of the victims and reinforces our collective responsibility to prevent such atrocities in the future.
 
-pal <-
-  colorFactor("Dark2", domain = build$cost |> unique())
-
-leaflet() |>
-  addTiles() |> # Add default OpenStreetMap map tiles
-  addCircleMarkers(
-    data = build,
-    lng = build$lon,
-    lat = build$lat,
-    color = pal(build$cost),
-    popup = paste(
-      "<b>Location:</b>",
-      as.character(build$location),
-      "<br>",
-      "<b>Amount:</b>",
-      as.character(build$spend_construction),
-      "<br>"
-    )
-  ) |>
-  addLegend(
-    "bottomright",
-    pal = pal,
-    values = build$cost |> unique(),
-    title = "Type",
-    opacity = 1
-  )
-```
-```{r}
-library(shiny)
-library(ggplot2)
-library(readr)
-
-# Replace 'path/to/your/data.xlsx' with the actual path to your Excel file
-# Adjust 'sheet' and column names as necessary
-data <- readr::read_csv("data/raw_data/Raw_data.csv")
-
-ui <- fluidPage(
-  titlePanel("Auschwitz Victims by Nationality"),
-  sidebarLayout(
-    sidebarPanel(
-      checkboxGroupInput("nationalities", "Choose nationalities:", choices = unique(data$Nationality))
-    ),
-    mainPanel(
-      plotOutput("plot"),
-      tableOutput("table")
-    )
-  )
-)
-
-server <- function(input, output) {
-  output$plot <- renderPlot({
-    selected_data <- data[data$Nationality %in% input$nationalities, ]
-    ggplot(selected_data, aes(x = Nationality, y = Number_of_Victims)) +
-      geom_bar(stat = "identity")
-  })
-  
-  output$table <- renderTable({
-    data[data$Nationality %in% input$nationalities, ]
-  })
-}
-
-shinyApp(ui = ui, server = server)
-
-```
-
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-# Specify the new directory path
-new_directory <- "~/Users/seanuuuu/Desktop/STA302/Essay12 Shiny"
-
-# Change the current working directory
-setwd(new_directory)
-
-# Check if the directory changed
-current_directory <- getwd()
-print(current_directory)
-```
-
-Talk way more about it. 
-
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
-```
-
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
-
-
-
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-##pp_check(first_model) +
-  ##theme_classic() +
-  ##theme(legend.position = "bottom")
-
-##posterior_vs_prior(first_model) +
-  ##theme_minimal() +
-  ##scale_color_brewer(palette = "Set1") +
-  ##theme(legend.position = "bottom") +
-  ##coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-##plot(first_model, "trace")
-
-##plot(first_model, "rhat")
-```
 
 
 
